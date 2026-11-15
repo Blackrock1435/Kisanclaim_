@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-canvas font-sans text-navy antialiased; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  :focus-visible { outline: 3px solid #D6A84F; outline-offset: 2px; border-radius: 4px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+}
+@layer components {
+  .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-5 text-[15px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply bg-forest text-white hover:bg-forest-deep; }
+  .btn-gold { @apply bg-gold text-navy hover:brightness-95; }
+  .btn-ghost { @apply border border-sage-200 bg-white text-navy hover:bg-sage-50; }
+  .btn-danger { @apply bg-red-700 text-white hover:bg-red-800; }
+  .input { @apply min-h-[44px] w-full rounded-lg border border-sage-200 bg-white px-3 text-[15px] placeholder:text-slate-400 focus:border-forest; }
+  .label { @apply mb-1 block text-sm font-semibold text-navy; }
+  .card { @apply rounded-xl bg-white shadow-soft; }
+}
+.leaflet-container { font-family: inherit; z-index: 0; }
+@keyframes sweep { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.hero-in { animation: sweep .7s ease-out both; }
