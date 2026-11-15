@@ -1,0 +1,22 @@
+# Development/demo stack. For production put HTTPS in front (see docs/deployment.md).
+services:
+  db:
+    image: postgis/postgis:16-3.4          # PostGIS ready for the geometry-column upgrade (see docs/database.md)
+    environment: { POSTGRES_DB: kisanclaim, POSTGRES_USER: kisanclaim, POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}" }
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U kisanclaim"], interval: 5s, retries: 10 }
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://kisanclaim:${POSTGRES_PASSWORD}@db:5432/kisanclaim
+      UPLOAD_DIR: /data/storage
+      CORS_ORIGINS: http://localhost:8080
+      PUBLIC_BASE_URL: http://localhost:8080
+    volumes: [uploads:/data]
+    depends_on: { db: { condition: service_healthy } }
+  frontend:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on: [backend]
+volumes: { pgdata: {}, uploads: {} }

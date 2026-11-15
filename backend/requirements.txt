@@ -1,0 +1,19 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+sqlalchemy>=2.0
+psycopg[binary]>=3.2
+pydantic>=2.7
+pydantic-settings>=2.3
+email-validator>=2.1
+python-multipart>=0.0.9
+pyjwt>=2.8
+pwdlib[argon2]>=0.2
+shapely>=2.0
+pyproj>=3.6
+pillow>=10.3
+httpx>=0.27
+reportlab>=4.2
+qrcode>=7.4
+pytest>=8.0
+# Optional - only for real Sentinel-2 analysis (see docs/setup.md):
+# earthengine-api>=0.1.400
